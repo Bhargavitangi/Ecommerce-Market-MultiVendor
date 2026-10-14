@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}Shop{% endblock %}
+{% block content %}
+<section class="hero">
+  <div>
+    <p class="eyebrow">ONE MARKETPLACE · MANY SELLERS</p>
+    <h1>Find something<br><span>you’ll love.</span></h1>
+    <p class="muted">Discover products from independent sellers in one place.</p>
+  </div>
+  <div class="hero-mark">M</div>
+</section>
+<form class="search" method="get" action="{{ url_for('index') }}">
+  <input name="q" value="{{ q }}" placeholder="Search products..." aria-label="Search products">
+  <button type="submit">Search</button>
+</form>
+<div class="section-heading"><div><h2>Marketplace products</h2><p class="muted">{{ products|length }} product(s) found</p></div></div>
+{% if products %}
+<div class="product-grid">
+{% for p in products %}
+  <article class="product-card">
+    {% if p.image_url %}<img class="product-image" src="{{ p.image_url }}" alt="{{ p.name }}" onerror="this.style.display='none'">
+    {% else %}<div class="product-placeholder">✦</div>{% endif %}
+    <div class="product-body">
+      <p class="seller-tag">SOLD BY {{ p.seller_name }}</p>
+      <h3>{{ p.name }}</h3>
+      <p class="description">{{ p.description or 'No description provided.' }}</p>
+      <div class="product-bottom"><strong>₹{{ '%.2f'|format(p.price) }}</strong><span class="stock">{{ p.stock }} in stock</span></div>
+      <form method="post" action="{{ url_for('add_to_cart', product_id=p.id) }}">
+        <button class="full-button" type="submit" {% if p.stock < 1 %}disabled{% endif %}>Add to cart</button>
+      </form>
+    </div>
+  </article>
+{% endfor %}
+</div>
+{% else %}
+<div class="empty"><h3>No products found</h3><p>Try another search, or check again after sellers add products.</p></div>
+{% endif %}
+{% endblock %}
