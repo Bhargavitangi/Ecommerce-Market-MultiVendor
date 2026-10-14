@@ -26,3 +26,6 @@ Overall, the E-Commerce Market (Multi-Vendor) project demonstrates how frontend 
 
 OUTPUT:
 
+<img width="960" height="540" alt="Image" src="https://github.com/user-attachments/assets/838a4db0-e201-4848-aab8-c64936d7cd68" />
+
+<img width="960" height="540" alt="Image" src="https://github.com/user-attachments/assets/d1a46d65-6789-43a8-be0b-9df305807938" />
